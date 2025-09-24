@@ -16,9 +16,9 @@ class RequestServiceTest extends TestCase
     public const string DEFAULT_LOCALE = 'en';
 
     #[DataProvider('localeDataProvider')]
-    public function testGetLocale(RequestStack|null $requestStack, string $locale): void
+    public function testGetLocale(?RequestStack $requestStack, string $locale): void
     {
-        //todo: check service, because it returns preferred locale
+        // todo: check service, because it returns preferred locale
         $service = new RequestService($requestStack, self::DEFAULT_LOCALE, self::SUPPORTED_LOCALES);
 
         $this->assertEquals($locale, $service->getLocale());

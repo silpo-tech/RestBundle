@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace RestBundle\Service;
 
-use JsonSerializable;
 use PaginatorBundle\Paginator\PaginatorInterface;
 use RestBundle\DTO\JsonSerializableObject;
 
@@ -17,7 +16,7 @@ final class CollectionResponseBuilder
     {
         $this->items = $items;
 
-        $this->isJsonSerializable = reset($items) instanceof JsonSerializable;
+        $this->isJsonSerializable = reset($items) instanceof \JsonSerializable;
 
         return $this;
     }
@@ -41,7 +40,7 @@ final class CollectionResponseBuilder
         return $data;
     }
 
-    public function buildLimitOffsetPaginatedCollection(PaginatorInterface $paginator, int|null $total = null): mixed
+    public function buildLimitOffsetPaginatedCollection(PaginatorInterface $paginator, ?int $total = null): mixed
     {
         return $this->rawOrJsonSerializable(
             $paginator->serialize() + [

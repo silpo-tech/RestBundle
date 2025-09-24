@@ -43,13 +43,12 @@ class RestControllerTest extends WebTestCase
                 'offset' => 0,
                 'limit' => 2,
             ],
-            'expected' =>
-                json_encode([
-                    'limit' => 2,
-                    'offset' => 0,
-                    'total' => 5,
-                    'items' => self::getArraySlice(),
-                ]),
+            'expected' => json_encode([
+                'limit' => 2,
+                'offset' => 0,
+                'total' => 5,
+                'items' => self::getArraySlice(),
+            ]),
         ];
 
         yield 'CollectionResponse' => [
@@ -60,11 +59,10 @@ class RestControllerTest extends WebTestCase
                 'offset' => 0,
                 'collection' => self::getArraySlice(3, 4),
             ],
-            'expected' =>
-                json_encode([
-                    'total' => 4,
-                    'items' => self::getArraySlice(3, 4),
-                ]),
+            'expected' => json_encode([
+                'total' => 4,
+                'items' => self::getArraySlice(3, 4),
+            ]),
         ];
 
         yield 'PaginatedResponse' => [
@@ -78,17 +76,15 @@ class RestControllerTest extends WebTestCase
                     ['id' => 2, 'name' => 'Benedict'],
                 ],
             ],
-            'expected' =>
-                json_encode([
-                    'limit' => 2,
-                    'offset' => 0,
-                    'total' => 2,
-                    'items' =>
-                        [
-                            ['id' => 1, 'name' => 'Anthony'],
-                            ['id' => 2, 'name' => 'Benedict'],
-                        ],
-                ]),
+            'expected' => json_encode([
+                'limit' => 2,
+                'offset' => 0,
+                'total' => 2,
+                'items' => [
+                    ['id' => 1, 'name' => 'Anthony'],
+                    ['id' => 2, 'name' => 'Benedict'],
+                ],
+            ]),
         ];
 
         yield 'NextAwarePaginatedResponse' => [
@@ -99,14 +95,12 @@ class RestControllerTest extends WebTestCase
                 'total' => 3,
                 'collection' => self::getArraySlice(0, 3),
             ],
-            'expected' =>
-                json_encode([
-                    'limit' => 2,
-                    'offset' => 0,
-                    'hasNext' => true,
-                    'items' =>
-                        self::getArraySlice(),
-                ]),
+            'expected' => json_encode([
+                'limit' => 2,
+                'offset' => 0,
+                'hasNext' => true,
+                'items' => self::getArraySlice(),
+            ]),
         ];
     }
 

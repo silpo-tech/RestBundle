@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace RestBundle\DTO;
 
-use JsonSerializable;
 use PhpSolution\StdLib\JSON\JsonSerializableTrait;
-use stdClass;
 
-final class JsonSerializableObject extends stdClass implements JsonSerializable
+final class JsonSerializableObject extends \stdClass implements \JsonSerializable
 {
     use JsonSerializableTrait;
 

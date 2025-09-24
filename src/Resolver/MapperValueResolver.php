@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace RestBundle\Resolver;
 
 use ExceptionHandlerBundle\Exception\ValidationException;
-use LogicException;
 use MapperBundle\Mapper\MapperInterface;
 use RestBundle\Attribute\Mapper;
 use RestBundle\Attribute\ValidatableInterface;
@@ -19,7 +18,7 @@ class MapperValueResolver implements ValueResolverInterface
 {
     public function __construct(
         protected readonly MapperInterface $mapper,
-        protected readonly ValidatorInterface|null $validator = null,
+        protected readonly ?ValidatorInterface $validator = null,
     ) {
     }
 
@@ -38,12 +37,7 @@ class MapperValueResolver implements ValueResolverInterface
         );
 
         if (!$type = $argument->getType()) {
-            throw new LogicException(
-                sprintf(
-                    'Could not resolve the "$%s" controller argument: argument should be typed.',
-                    $argument->getName(),
-                ),
-            );
+            throw new \LogicException(sprintf('Could not resolve the "$%s" controller argument: argument should be typed.', $argument->getName()));
         }
 
         $parameters = $this->addMappedParameters($attribute->getOptions['mapping'] ?? [], $parameters);

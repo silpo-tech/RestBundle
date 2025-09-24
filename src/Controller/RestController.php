@@ -6,8 +6,6 @@ namespace RestBundle\Controller;
 
 use Doctrine\Common\Collections\AbstractLazyCollection;
 use Doctrine\Common\Collections\Collection;
-use Iterator;
-use JsonSerializable;
 use MapperBundle\Mapper\MapperInterface;
 use PaginatorBundle\Paginator\OffsetPaginator;
 use PaginatorBundle\Paginator\OffsetPaginatorInterface;
@@ -18,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Service\Attribute\Required;
-use Traversable;
 
 /**
  * RestController.
@@ -58,18 +55,18 @@ class RestController extends AbstractController
         return new Response('', $statusCode);
     }
 
-    protected function createCollectionResponse(iterable $collection, string|null $dtoName = null): Response
+    protected function createCollectionResponse(iterable $collection, ?string $dtoName = null): Response
     {
         return $this->createListResponse($collection, $dtoName);
     }
 
-    private function createListResponse(iterable $collection, string|null $dtoName = null): Response
+    private function createListResponse(iterable $collection, ?string $dtoName = null): Response
     {
-        $items = ($collection instanceof Collection || $collection instanceof Iterator)
+        $items = ($collection instanceof Collection || $collection instanceof \Iterator)
             ? $collection->toArray()
             : $collection;
         $items = empty($dtoName) ? $items : $this->mapper->convertCollection($items, $dtoName);
-        $items = array_values($items instanceof Traversable ? iterator_to_array($items) : $items);
+        $items = array_values($items instanceof \Traversable ? iterator_to_array($items) : $items);
 
         return $this->createResponse(
             $this->collectionResponseBuilder->forItems($items)->buildFullCollection(),
@@ -79,13 +76,13 @@ class RestController extends AbstractController
     /**
      * @throws \JsonException
      */
-    protected function createResponse($data, string|null $dtoName = null, int $statusCode = Response::HTTP_OK): Response
+    protected function createResponse($data, ?string $dtoName = null, int $statusCode = Response::HTTP_OK): Response
     {
         if (null !== $dtoName) {
             $data = $this->mapper->convert($data, $dtoName);
         }
 
-        $data = $data instanceof JsonSerializable
+        $data = $data instanceof \JsonSerializable
             ? json_encode($data, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION)
             : $this->serializer->serialize($data, 'json');
 
@@ -99,7 +96,7 @@ class RestController extends AbstractController
     protected function createPaginatedResponse(
         AbstractLazyCollection&PaginatableInterface $collection,
         PaginatorInterface $paginator,
-        string|null $dtoName = null,
+        ?string $dtoName = null,
     ): Response {
         $paginator->paginate($collection);
         $items = $collection->isEmpty() ? [] : $collection;
@@ -116,13 +113,13 @@ class RestController extends AbstractController
         int $total,
         iterable $collection,
         PaginatorInterface $paginator,
-        string|null $dtoName = null,
+        ?string $dtoName = null,
     ): Response {
-        $items = ($collection instanceof Collection || $collection instanceof Iterator)
+        $items = ($collection instanceof Collection || $collection instanceof \Iterator)
             ? $collection->toArray()
             : $collection;
 
-        if ($items instanceof Traversable) {
+        if ($items instanceof \Traversable) {
             $items = iterator_to_array($items);
         }
 
@@ -138,7 +135,7 @@ class RestController extends AbstractController
     protected function createNextAwarePaginatedResponse(
         AbstractLazyCollection&PaginatableInterface $collection,
         OffsetPaginatorInterface $paginator,
-        string|null $dtoName = null,
+        ?string $dtoName = null,
     ): Response {
         $nextAwarePaginator = new OffsetPaginator($paginator->getOffset(), $paginator->getLimit() + 1);
         $nextAwarePaginator->paginate($collection);

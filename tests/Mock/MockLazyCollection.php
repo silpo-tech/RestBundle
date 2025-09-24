@@ -30,7 +30,8 @@ class MockLazyCollection extends AbstractLazyCollection implements PaginatableIn
         $this->offset = $offset;
     }
 
-    #[\Override] protected function doInitialize()
+    #[\Override]
+    protected function doInitialize()
     {
     }
 }

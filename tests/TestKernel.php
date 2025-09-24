@@ -35,8 +35,8 @@ class TestKernel extends Kernel
     ];
 
     public const array DEFAULT_CONFIGS = [
-        __DIR__ . '/Resources/config/framework.yaml',
-        __DIR__ . '/Resources/config/services.yaml',
+        __DIR__.'/Resources/config/framework.yaml',
+        __DIR__.'/Resources/config/services.yaml',
     ];
 
     public function __construct(
@@ -62,17 +62,17 @@ class TestKernel extends Kernel
 
     public function getConfigDir(): string
     {
-        return $this->getProjectDir() . '/src/Resources/config';
+        return $this->getProjectDir().'/src/Resources/config';
     }
 
     public function getCacheDir(): string
     {
-        return __DIR__ . '/../var/cache/' . $this->getEnvironment();
+        return __DIR__.'/../var/cache/'.$this->getEnvironment();
     }
 
     public function getLogDir(): string
     {
-        return __DIR__ . '/../var/log';
+        return __DIR__.'/../var/log';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
@@ -147,46 +147,37 @@ class TestKernel extends Kernel
     public function getRoutesArray(): array
     {
         return [
-            'mock-response' =>
-                new Route('/mock-response', [
-                    '_controller' => [ResponseController::class, 'arrayResponse'],
-                ]),
+            'mock-response' => new Route('/mock-response', [
+                '_controller' => [ResponseController::class, 'arrayResponse'],
+            ]),
 
-            'mock-response-dto' =>
-                new Route('/mock-response-dto', [
-                    '_controller' => [ResponseController::class, 'dto'],
-                ]),
+            'mock-response-dto' => new Route('/mock-response-dto', [
+                '_controller' => [ResponseController::class, 'dto'],
+            ]),
 
-            'mock-response-empty' =>
-                new Route('/mock-response-empty', [
-                    '_controller' => [ResponseController::class, 'empty'],
-                ]),
+            'mock-response-empty' => new Route('/mock-response-empty', [
+                '_controller' => [ResponseController::class, 'empty'],
+            ]),
 
-            'mock-registry' =>
-                new Route('/mock-registry', [
-                    '_controller' => RegistryMapperRequestController::class,
-                ]),
-            'mock-value' =>
-                new Route('/mock-value', [
-                    '_controller' => MapperValueRequestController::class,
-                ]),
+            'mock-registry' => new Route('/mock-registry', [
+                '_controller' => RegistryMapperRequestController::class,
+            ]),
+            'mock-value' => new Route('/mock-value', [
+                '_controller' => MapperValueRequestController::class,
+            ]),
 
-            'mock-paginated-response' =>
-                new Route('/mock-paginated-response', [
-                    '_controller' => [CollectionResponseController::class, 'paginatedResponse'],
-                ]),
-            'mock-paginated-response-list-dto' =>
-                new Route('/mock-paginated-response-list-dto', [
-                    '_controller' => [CollectionResponseController::class, 'list'],
-                ]),
-            'mock-collection-response' =>
-                new Route('/mock-collection-response', [
-                    '_controller' => [CollectionResponseController::class, 'collection'],
-                ]),
-            'mock-next-aware-paginated-response' =>
-                new Route('/mock-next-aware-paginated-response', [
-                    '_controller' => [CollectionResponseController::class, 'nextAwarePaginatedResponse'],
-                ]),
+            'mock-paginated-response' => new Route('/mock-paginated-response', [
+                '_controller' => [CollectionResponseController::class, 'paginatedResponse'],
+            ]),
+            'mock-paginated-response-list-dto' => new Route('/mock-paginated-response-list-dto', [
+                '_controller' => [CollectionResponseController::class, 'list'],
+            ]),
+            'mock-collection-response' => new Route('/mock-collection-response', [
+                '_controller' => [CollectionResponseController::class, 'collection'],
+            ]),
+            'mock-next-aware-paginated-response' => new Route('/mock-next-aware-paginated-response', [
+                '_controller' => [CollectionResponseController::class, 'nextAwarePaginatedResponse'],
+            ]),
         ];
     }
 }

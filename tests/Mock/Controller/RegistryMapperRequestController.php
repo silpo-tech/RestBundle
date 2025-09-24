@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace RestBundle\Tests\Mock\Controller;
 
-use JsonException;
 use MapperBundle\Mapper\MapperInterface;
 use RestBundle\Attribute\RegistryMapper;
 use RestBundle\Controller\RestController;
@@ -27,7 +26,7 @@ class RegistryMapperRequestController extends RestController
     }
 
     /**
-     * @throws JsonException
+     * @throws \JsonException
      */
     public function __invoke(
         #[RegistryMapper(registry: RequestDTORegistry::class)]

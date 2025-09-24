@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace RestBundle\Resolver;
 
-use BadMethodCallException;
 use MapperBundle\Mapper\MapperInterface;
 use RestBundle\Attribute\RegistryMapper;
 use RestBundle\Request\RequestMapperInterface;
@@ -21,7 +20,7 @@ class RegistryMapperResolver extends MapperValueResolver implements ValueResolve
         #[Autowire(service: 'service_container')]
         protected readonly ContainerInterface $container,
         MapperInterface $mapper,
-        ValidatorInterface|null $validator = null,
+        ?ValidatorInterface $validator = null,
     ) {
         parent::__construct($mapper, $validator);
     }
@@ -33,7 +32,7 @@ class RegistryMapperResolver extends MapperValueResolver implements ValueResolve
             : new $class();
     }
 
-    protected function getType($argument, Request $request): string|null
+    protected function getType($argument, Request $request): ?string
     {
         $attribute = $argument->getAttributesOfType(RegistryMapper::class, ArgumentMetadata::IS_INSTANCEOF)[0];
 
@@ -41,7 +40,7 @@ class RegistryMapperResolver extends MapperValueResolver implements ValueResolve
         $registryMethod = $attribute->getMethod();
 
         if (!is_callable([$registry, $registryMethod])) {
-            throw new BadMethodCallException($registryMethod . ' method does not exist.');
+            throw new \BadMethodCallException($registryMethod.' method does not exist.');
         }
 
         return $registry->$registryMethod($request);
