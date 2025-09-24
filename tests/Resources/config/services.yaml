@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  RestBundle\Tests\Mock\:
+    resource: '../../../tests/Mock/*'
+
+  AutoMapperPlus\AutoMapperInterface:
+    class: AutoMapperPlus\AutoMapper
