@@ -10,7 +10,7 @@
     "doctrine/collections": "^1.5",
     "silpo-tech/exception-handler-bundle": "^2.0",
     "silpo-tech/mapper-bundle": "^1.0",
-    "silpo-tech/paginator-bundle": "^1.0",
+    "silpo-tech/paginator-bundle": "^2.0",
     "mark-gerarts/automapper-plus-bundle": "^1.0",
     "php-solution/std-lib": "^1.0",
     "symfony/yaml": "^7.2",
