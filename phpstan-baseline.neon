@@ -6,14 +6,4 @@ parameters:
 			count: 1
 			path: src/Resolver/MapperValueResolver.php
 
-		-
-			message: '#^Instantiated class ExceptionHandlerBundle\\Exception\\ValidationException not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Resolver/MapperValueResolver.php
 
-		-
-			message: '#^Throwing object of an unknown class ExceptionHandlerBundle\\Exception\\ValidationException\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Resolver/MapperValueResolver.php
