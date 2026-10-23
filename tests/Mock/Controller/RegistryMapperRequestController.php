@@ -12,7 +12,7 @@ use RestBundle\Tests\Mock\RequestDTO;
 use RestBundle\Tests\Mock\RequestDTORegistry;
 use RestBundle\Tests\Mock\ResponseDTO;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/mock-registry', name: 'mock-registry')]
