@@ -7,7 +7,7 @@
     "php": ">=8.2",
     "symfony/serializer": "^7.2",
     "symfony/validator": "^7.2",
-    "doctrine/collections": "^1.5",
+    "doctrine/collections": "^1.5||^2.1||^3.1",
     "silpo-tech/exception-handler-bundle": "^2.0",
     "silpo-tech/mapper-bundle": "^1.0",
     "silpo-tech/paginator-bundle": "^2.0",
