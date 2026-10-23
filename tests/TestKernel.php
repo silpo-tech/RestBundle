@@ -62,7 +62,7 @@ class TestKernel extends Kernel
 
     public function getConfigDir(): string
     {
-        return $this->getProjectDir().'/src/Resources/config';
+        return $this->getCacheDir();
     }
 
     public function getCacheDir(): string
