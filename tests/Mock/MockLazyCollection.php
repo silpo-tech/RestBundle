@@ -31,7 +31,7 @@ class MockLazyCollection extends AbstractLazyCollection implements PaginatableIn
     }
 
     #[\Override]
-    protected function doInitialize()
+    protected function doInitialize(): void
     {
     }
 }
