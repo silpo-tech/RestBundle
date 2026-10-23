@@ -10,11 +10,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        php-version: ['8.3', '8.4']
+        php-version: ['8.3', '8.4', '8.5', '8.6']
         dependency-version: [prefer-lowest, prefer-stable]
+        include:
+          - php-version: '8.6'
+            allow-failure: true
 
     name: PHP ${{ matrix.php-version }} - ${{ matrix.dependency-version }}
+    continue-on-error: ${{ matrix.allow-failure == true }}
 
     permissions:
       contents: read
